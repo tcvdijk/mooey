@@ -35,7 +35,7 @@ class Canvas(QWidget):
         self.view = QTransform()
 
         # load a network
-        filename = 'loom/wien.json'
+        filename = 'loom-examples/wien.json'
         self.network, self.filedata = read_network_from_loom(filename)
         self.network.scale_by_shortest_edge( min_edge_scale )
 
