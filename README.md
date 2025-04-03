@@ -27,7 +27,7 @@ Then install libraries (mostly `ortools`, `scipy`, `pyside6`) using the `pip` re
 
 ```pip install -r requirements.txt```
 
-In order to the map to SVG, you need to install [Loom](https://github.com/ad-freiburg/loom) so that `loom` and `transitmap` are available from the shell.
+In order to render the map to SVG, you need to install [Loom](https://github.com/ad-freiburg/loom) so that `loom` and `transitmap` are available from the shell.
 
 ## Running
 
