@@ -7,7 +7,7 @@ Thomas C. van Dijk, Soeren Terziadis - TU Eindhoven
 
 ---
 
-*Abstract* - [Demo video](https://youtu.be/JEC1Ym6qWeg)
+*Abstract* - [Demo video](https://youtu.be/Pgm2cPlT_vA)
 
 London's famous "tube map" is an iconic piece of design and perhaps represents the schematic visualization style most well-known to the general public: its octolinear style has become the de facto standard for transit maps around the world.
 Making a good schematic transit map is challenging and labour-intensive, and has attracted the attention of the optimization community.
