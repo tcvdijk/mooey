@@ -286,6 +286,7 @@ class Canvas(QWidget):
                 self.network, self.filedata = read_network_from_loom(file_name)
             self.network.scale_by_shortest_edge( min_edge_scale )
             self.history_checkpoint( f'Open "{file_name}"' )
+            self.zoom_to_network()
 
     
     def history_checkpoint(self, text):

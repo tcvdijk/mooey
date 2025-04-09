@@ -33,6 +33,7 @@ def render_network( painter, net, show_labels ):
     # Draw the edges
     for e in net.edges:
         painter.setPen( ui.edge_pen )
+
         painter.setBrush(Qt.NoBrush )
 
         a_start = e.v[0].pos
