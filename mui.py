@@ -1,6 +1,5 @@
 import sys
 from math import inf, pow
-from copy import deepcopy
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QSizePolicy, QFrame, QLabel, QCheckBox, QMenu, QMessageBox, QFileDialog
 from PySide6.QtGui import QPainter, QPixmap, QColor, Qt, QTransform, QVector2D, QAction, QKeySequence
@@ -74,6 +73,7 @@ class Canvas(QWidget):
         painter.drawPixmap(0, 0, self.pixmap)
 
     def render(self):
+        self.network.clone()
         painter = QPainter(self.pixmap)
         painter.setRenderHint(QPainter.Antialiasing)
         # viewport
@@ -290,7 +290,7 @@ class Canvas(QWidget):
         # Delete the future
         self.history = self.history[0:self.history_index+1]
         # Add the present
-        self.history.append(( text, deepcopy(self.network) ))
+        self.history.append(( text, self.network.clone() ))
         self.history_index += 1
         self.update_history_actions()
 
@@ -323,7 +323,7 @@ class Canvas(QWidget):
         self.update_history_actions()
         self.render()
     def fetch_history(self):
-        self.network = deepcopy(self.history[self.history_index][1])
+        self.network = self.history[self.history_index][1].clone()
 
 def drawing_is_completely_oob(canvas):
     # Is any node on the canvas based on the viewport? (Ignores edges.)

@@ -11,6 +11,29 @@ class Network:
         self.nodes = {}
         self.edges = []
 
+    def clone(self):
+        other = Network()
+        node_clones = dict()
+        for k,v in self.nodes.items():
+            other_v = Node(v.pos.x(), v.pos.y(), v.name, v.label)
+            node_clones[v] = other_v
+            other_v.geo_pos = v.geo_pos
+            other.nodes[k] = other_v
+        edge_clones = dict()
+        for e in self.edges:
+            a = other.nodes[ e.v[0].name ]
+            b = other.nodes[ e.v[1].name ]
+            other_e = Edge(a,b)
+            edge_clones[e] = other_e
+            a.edges.append( other_e )
+            b.edges.append( other_e )
+            other.edges.append( other_e )
+            other_e.bend = e.bend
+            other_e.port = e.port[:] # new copy of list
+        for v in self.nodes.values():
+            node_clones[v].ports = [ edge_clones.get(e,None) for e in v.ports ]
+        return other
+
     def scale_by_shortest_edge( self, lb ):
         min_length = min([ e.geo_vector(e.v[0]).length() for e in self.edges ])
         factor = lb/min_length
@@ -31,16 +54,6 @@ class Node:
         self.label = label
         self.edges = []
         self.ports = [None]*8
-
-    # def __scopy__(self):
-    #     new = Node(0,0,self.name)
-    #     new.pos = self.pos
-    #     new.geo_pos = self.geo_pos
-    #     new.label = self.label
-    #     new.edges = [ e for e in self.edges ]
-    #     new.ports = [ p for p in self.ports ]
-    #     return new
-
 
     def set_position( self, x, y ):
         self.pos = QPointF(x,y)
