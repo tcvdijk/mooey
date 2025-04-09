@@ -488,6 +488,7 @@ def group_separator(layout):
 if __name__ == "__main__":
     print("Welcome to Mooey!")
     app = QApplication(sys.argv)
+    app.setApplicationName("Mooey")
     window = MainWindow()
     window.show()
     window.canvas.zoom_to_network()
