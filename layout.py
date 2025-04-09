@@ -7,14 +7,16 @@ from ortools.linear_solver import pywraplp as lp
 
 diag = 1/sqrt(2) # notational convenience
 
-# How long must the distance from station to bend be,
-# as a fraction of how long an edge must be?
-bend_length_factor = 1 
-
+# How long must the distance from station to station be?
+# in the "short" and "long" cases?
+min_dist = 100
+# Factor for how long the distance to bend must be
+# in the "short" and "long" cases
+bend_short = 0.5
+bend_long = 1
 
 def layout_lp( net, stable_node:Node = None ):
     
-    min_dist = 100
 
     start = perf_counter()
     solver = lp.Solver.CreateSolver('GLOP')
@@ -55,8 +57,8 @@ def layout_lp( net, stable_node:Node = None ):
                     e.bend = Node(0,0,f"bend-{e.v[0].name}-{e.v[1].name}")
                     e.bend.xvar = solver.NumVar(0,solver.infinity(), v.name+'_x')
                     e.bend.yvar = solver.NumVar(0,solver.infinity(), v.name+'_y')
-                    objective += edge_constraint( solver, objective, e.v[0], e.port[0], e.bend, min_dist*bend_length_factor )
-                    objective += edge_constraint( solver, objective, e.v[1], e.port[1], e.bend, min_dist*bend_length_factor )
+                    objective += edge_constraint( solver, objective, e.v[0], e.port[0], e.bend, min_dist*bend_short )
+                    objective += edge_constraint( solver, objective, e.v[1], e.port[1], e.bend, min_dist*bend_short )
 
     # Space the stations on degree 2 paths
     seen = dict()
