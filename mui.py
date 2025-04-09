@@ -1,7 +1,7 @@
 import sys
 from math import inf, pow
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QSizePolicy, QFrame, QLabel, QCheckBox, QMenu, QMessageBox, QFileDialog
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QSizePolicy, QFrame, QLabel, QCheckBox, QMenu, QMessageBox, QFileDialog, QDialog
 from PySide6.QtGui import QPainter, QPixmap, QColor, Qt, QTransform, QVector2D, QAction, QKeySequence
 from PySide6.QtCore import QPointF, QEvent
 
@@ -13,6 +13,8 @@ from layout import layout_lp
 
 from fileformat_graphml import read_network_from_graphml
 from fileformat_loom import read_network_from_loom, export_loom, render_loom
+
+from dialog_bend_penalty import BendPenaltyDialog
 
 min_edge_scale = 80
 
@@ -397,9 +399,13 @@ def do_assign_matching(window):
     window.canvas.render()
 
 def do_assign_ilp(window):
-    assign_by_ilp(window.canvas.network)
-    window.canvas.history_checkpoint("Assign ports globally")
-    window.canvas.render()
+    bend_cost = 1
+    dialog = BendPenaltyDialog()
+    if dialog.exec() == QDialog.Accepted:
+        bend_cost = dialog.get_value()
+        assign_by_ilp(window.canvas.network,bend_cost)
+        window.canvas.history_checkpoint("Assign ports globally")
+        window.canvas.render()
     
 def do_layout(window):
     if layout_lp(window.canvas.network) is False:
@@ -447,7 +453,7 @@ def construct_sidebar(window,layout):
     sidebar_button(layout, "Evict all", lambda:do_assign_reset(window))
     sidebar_button(layout, "Rounding", lambda:do_assign_round(window))
     sidebar_button(layout, "Matching", lambda:do_assign_matching(window))
-    sidebar_button(layout, "Global", lambda:do_assign_ilp(window))
+    sidebar_button(layout, "Global...", lambda:do_assign_ilp(window))
     
     group_separator(layout)
     layout.addWidget(QLabel("Layout"))

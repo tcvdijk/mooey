@@ -40,9 +40,9 @@ def assign_by_local_matching( net ):
 ### INTEGER LINEAR PROGRAMMING ###
 
 from ortools.linear_solver import pywraplp as lp
-def assign_by_ilp( net ):
+def assign_by_ilp( net, bend_cost=1 ):
 
-    bend_cost = 1 # relative to squared angle errors
+    # bend cost is relative to squared angle errors
 
     solver = lp.Solver.CreateSolver("SCIP")
     start = perf_counter()
