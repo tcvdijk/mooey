@@ -103,6 +103,12 @@ class Node:
             v.assign_both_ends(e,port,force=True)
             v = e.other(v)
 
+    def is_straight_through( self ):
+        if len(self.edges)==2:
+            a = self.edges[0].port_at(self)
+            b = self.edges[1].port_at(self)
+            return a==opposite_port(b)
+
     def is_right_angle( self ):
         if len(self.edges)==2:
             a = self.edges[0].port_at(self)
@@ -161,5 +167,8 @@ class Edge:
         dir = self.geo_vector(v)
         return pi-atan2(dir.y(),dir.x())
     
+    def consistent_ports(self):
+        return self.port[0]==opposite_port(self.port[1])
+
 def round_angle_to_port(angle):
     return int(((angle+pi/8)%(2*pi))/(pi/4))

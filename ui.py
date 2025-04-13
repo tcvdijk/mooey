@@ -38,8 +38,7 @@ handle_radius = 20
 
 def update_params( view_scale ):
     # Set some of the pens widths based on zoom level (so they don't go invisible)
-    edge_pen.setWidthF( max(2,0.35/view_scale) )
-    print(view_scale)
+    edge_pen.setWidthF( max(2,0.35/view_scale) )    
     # Set some of the widget scales based on zoom level (so they don't get too small)
     global rose_radius
     rose_radius = max( 20, 15/view_scale )

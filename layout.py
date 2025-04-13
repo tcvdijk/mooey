@@ -57,8 +57,8 @@ def layout_lp( net, stable_node:Node = None ):
                     e.bend = Node(0,0,f"bend-{e.v[0].name}-{e.v[1].name}")
                     e.bend.xvar = solver.NumVar(0,solver.infinity(), v.name+'_x')
                     e.bend.yvar = solver.NumVar(0,solver.infinity(), v.name+'_y')
-                    objective += edge_constraint( solver, objective, e.v[0], e.port[0], e.bend, min_dist*bend_short )
-                    objective += edge_constraint( solver, objective, e.v[1], e.port[1], e.bend, min_dist*bend_short )
+                    objective += edge_constraint( solver, objective, e.v[0], e.port[0], e.bend, min_dist*bend_length( e, 0 ) )
+                    objective += edge_constraint( solver, objective, e.v[1], e.port[1], e.bend, min_dist*bend_length( e, 1 ) )
 
     # Space the stations on degree 2 paths
     seen = dict()
@@ -141,7 +141,33 @@ def edge_constraint( solver, objective, a, port, b, min_dist ):
             solver.Add( a.xvar-a.yvar == b.xvar-b.yvar )
             solver.Add( b.xvar <= a.xvar - diag*min_dist )
             return 2*diag*a.xvar - 2*diag*b.xvar
-        
+
+long_bends = { (1,1), (2,1), (3,1)
+             , (1,2), (2,2)
+             , (3,1)
+             , (7,1)
+             }
+def bend_length( e, i ):
+    #return bend_long
+    vertex_free = free_angle( e.v[i], e.port[i] )
+    bend_free = bend_angle( e.port[0], e.port[1] )
+    is_long = (bend_free,vertex_free) in long_bends
+    return bend_long if is_long else bend_short
+
+def free_angle( v, p ):
+    return min( num_free_ports(v,p,1), num_free_ports(v,p,-1) )
+
+def num_free_ports( v, p, step ):
+    p = (p+step)%8
+    free = 1
+    while v.ports[p] is None and free<8:
+        p = (p+step)%8
+        free += 1
+    return free
+
+def bend_angle( p, q ):
+    return min( (p-q)%8, (q-p)%8 )
+
 
 def is_straight_deg2(v):
     return len(v.edges)==2 and v.edges[0].port_at(v)==opposite_port(v.edges[1].port_at(v))

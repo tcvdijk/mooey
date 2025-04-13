@@ -8,6 +8,8 @@ from PySide6.QtCore import QPointF, QEvent
 import render
 import ui
 
+from Network import opposite_port
+
 from assign import assign_by_rounding, assign_by_local_matching, assign_by_ilp
 from layout import layout_lp
 
@@ -166,6 +168,25 @@ class Canvas(QWidget):
                     if action == smoothen:
                         ui.hover_node.smoothen()
                         network_change = f'Smoothen "{ui.hover_node.label}"'
+                if ui.hover_node.is_straight_through():
+                    v = ui.hover_node
+                    if (not v.edges[0].consistent_ports()) ^ (not v.edges[1].consistent_ports()):
+                        menu = QMenu(self)
+                        bump = menu.addAction("Bump")
+                        action = menu.exec(self.mapToGlobal(event.position().toPoint()))
+                        if action == bump:
+                            from_id = 1 if v.edges[0].consistent_ports() else 0
+                            # edge that will become consistent:
+                            from_e = v.edges[from_id]
+                            # where does it come from?
+                            thru_port = from_e.port[1-from_e.id(v)]
+                            print('thru_port',thru_port)
+                            # consistently assign to us
+                            v.assign(from_e,opposite_port(thru_port),True)
+                            from_e.bend = None
+                            # go straight through here
+                            to_e = v.edges[1-from_id]
+                            v.assign(to_e,thru_port,True)
 
         if press and event.buttons() == Qt.LeftButton:
             print( ui.hover_node, ui.hover_edge, ui.hover_empty_port )
