@@ -77,7 +77,7 @@ class Canvas(QWidget):
         painter.drawPixmap(0, 0, self.pixmap)
 
     def render(self):
-        self.network.clone()
+        #self.network.clone()
         painter = QPainter(self.pixmap)
         painter.setRenderHint(QPainter.Antialiasing)
         # viewport
