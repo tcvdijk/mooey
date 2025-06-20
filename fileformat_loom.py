@@ -22,14 +22,20 @@ def read_network_from_loom(filename):
                 prop = feat['properties']
                 s = prop['from']
                 t = prop['to']
-                edge_staging.append( (s,t) )
+                if len(prop['lines'])==1:
+                    color = prop['lines'][0]['color']
+                else:
+                    color = '000000'
+                edge_staging.append( (s,t,color) )
         
-        for s,t in edge_staging:
+        for s,t,color in edge_staging:
             s = network.nodes[s]
             assert isinstance(s,Network.Node)
             t = network.nodes[t]
             assert isinstance(t,Network.Node)
-            network.edges.append( add_edge(s,t) )
+            e = add_edge(s,t)
+            e.color = color
+            network.edges.append( e )
                 
     return network, data
 

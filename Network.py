@@ -24,6 +24,7 @@ class Network:
             a = other.nodes[ e.v[0].name ]
             b = other.nodes[ e.v[1].name ]
             other_e = Edge(a,b)
+            other_e.color = e.color
             edge_clones[e] = other_e
             a.edges.append( other_e )
             b.edges.append( other_e )
@@ -132,6 +133,7 @@ class Edge:
         self.v = [a,b]
         self.port = [None,None]
         self.bend = None
+        self.color = '000000'
     
     def id(self,v):
         if self.v[0]==v: return 0

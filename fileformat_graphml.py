@@ -30,4 +30,5 @@ def add_edge(s,t):
     e = Network.Edge(s,t)
     s.edges.append(e)
     t.edges.append(e)
+    e.color = '000000'
     return e

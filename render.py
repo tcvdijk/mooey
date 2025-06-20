@@ -32,6 +32,7 @@ def render_network( painter, net, show_labels ):
 
     # Draw the edges
     for e in net.edges:
+        ui.edge_pen.setColor(QColor('#'+e.color))
         painter.setPen( ui.edge_pen )
 
         painter.setBrush(Qt.NoBrush )
