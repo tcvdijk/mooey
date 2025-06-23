@@ -1,5 +1,6 @@
 import sys
 from math import inf, pow
+import datetime
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QSizePolicy, QFrame, QLabel, QCheckBox, QMenu, QMessageBox, QFileDialog, QDialog
 from PySide6.QtGui import QPainter, QPixmap, QColor, Qt, QTransform, QVector2D, QAction, QKeySequence
@@ -257,8 +258,6 @@ class Canvas(QWidget):
         self.old_mouse = event.position()
         self.render()    
 
-
-
     def handle_scale_at(self, mouse_pos, scale):
         pos = self.worldspace(mouse_pos)
         scaleAt = QTransform( scale,0, 0,scale, (1-scale)*pos.x(), (1-scale)*pos.y() )
@@ -311,6 +310,8 @@ class Canvas(QWidget):
 
     
     def history_checkpoint(self, text):
+        # Log the message
+        logline( text )
         # Delete the future
         self.history = self.history[0:self.history_index+1]
         # Add the present
@@ -336,12 +337,14 @@ class Canvas(QWidget):
 
     def undo(self):
         # Assumes we don't undo to before the start of time
+        logline("Undo")
         self.history_index -= 1
         self.fetch_history()
         self.update_history_actions()
         self.render()
     def redo(self):
         # Assumes the future exists
+        logline("Redo")
         self.history_index += 1
         self.fetch_history()
         self.update_history_actions()
@@ -412,11 +415,13 @@ def do_assign_reset(window):
 
 def do_assign_round(window):
     assign_by_rounding(window.canvas.network)
+    update_layout_if_auto(window)
     window.canvas.history_checkpoint("Assign ports by rounding")
     window.canvas.render()
 
 def do_assign_matching(window):
     assign_by_local_matching(window.canvas.network)
+    update_layout_if_auto(window)
     window.canvas.history_checkpoint("Assign ports by matching")
     window.canvas.render()
 
@@ -426,6 +431,7 @@ def do_assign_ilp(window):
     if dialog.exec() == QDialog.Accepted:
         bend_cost = dialog.get_value()
         assign_by_ilp(window.canvas.network,bend_cost)
+        update_layout_if_auto(window)
         window.canvas.history_checkpoint("Assign ports globally")
         window.canvas.render()
     
@@ -440,6 +446,10 @@ def do_layout(window):
     if drawing_is_completely_oob(window.canvas):
         window.canvas.zoom_to_network()
     window.canvas.render()
+
+def update_layout_if_auto(window):
+    if window.canvas.auto_update.isChecked():
+        do_layout(window)
 
 def do_reset_layout(window):
     for v in window.canvas.network.nodes.values():
@@ -493,6 +503,16 @@ def construct_sidebar(window,layout):
     layout.addWidget(window.canvas.auto_render)
 
     group_separator(layout)
+    sidebar_button( layout, "Log checkpoint 1", lambda:(QApplication.beep(),logline("User pressed checkpoint 1")))
+    sidebar_button( layout, "Log checkpoint 2", lambda:(QApplication.beep(),logline("User pressed checkpoint 2")))
+    sidebar_button( layout, "Log checkpoint 3", lambda:(QApplication.beep(),logline("User pressed checkpoint 3")))
+    sidebar_button( layout, "Log checkpoint 4", lambda:(QApplication.beep(),logline("User pressed checkpoint 4")))
+    sidebar_button( layout, "Log checkpoint 5", lambda:(QApplication.beep(),logline("User pressed checkpoint 5")))
+    sidebar_button( layout, "Log checkpoint 6", lambda:(QApplication.beep(),logline("User pressed checkpoint 6")))
+    sidebar_button( layout, "Log checkpoint 7", lambda:(QApplication.beep(),logline("User pressed checkpoint 7")))
+    sidebar_button( layout, "Log checkpoint 8", lambda:(QApplication.beep(),logline("User pressed checkpoint 8")))
+    sidebar_button( layout, "Log checkpoint 9", lambda:(QApplication.beep(),logline("User pressed checkpoint 9")))
+    sidebar_button( layout, "Log checkpoint 10", lambda:(QApplication.beep(),logline("User pressed checkpoint 10")))
 
 
 def sidebar_button(layout, text, action):
@@ -506,10 +526,19 @@ def group_separator(layout):
     line.setFrameShadow(QFrame.Sunken)
     layout.addWidget(line)
 
+
+print("opening log file")
+logfile = open(f"mooey-log-{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt", "w")
+print("o hai", file=logfile)
+def logline( msg ):
+    print( datetime.datetime.now().strftime('%Y-%m-%d\t%H:%M:%S\t') + msg, file=logfile )
+
+
 if __name__ == "__main__":
     print("Welcome to Mooey!")
+
     app = QApplication(sys.argv)
-    app.setApplicationName("Mooey")
+    app.setApplicationName("Mooey")    
     window = MainWindow()
     window.show()
     window.canvas.zoom_to_network()
