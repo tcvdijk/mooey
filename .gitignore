@@ -1,5 +1,6 @@
 .DS_Store
 .vscode
 *.pyc
+*.txt
 render.json
 render.svg
