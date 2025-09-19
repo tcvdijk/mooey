@@ -177,11 +177,11 @@ class Canvas(QWidget):
                         ui.hover_node.smoothen()
                         network_change = f'Smoothen "{ui.hover_node.label}"'
                 if False and ui.hover_node.is_straight_through():
-                   v = ui.hover_node
-                   if (not v.edges[0].consistent_ports()) ^ (not v.edges[1].consistent_ports()):
-                       menu = QMenu(self)
-                       bump = menu.addAction("Bump")
-                       action = menu.exec(self.mapToGlobal(event.position().toPoint()))
+                    v = ui.hover_node
+                    if (not v.edges[0].consistent_ports()) ^ (not v.edges[1].consistent_ports()):
+                        menu = QMenu(self)
+                        bump = menu.addAction("Bump")
+                        action = menu.exec(self.mapToGlobal(event.position().toPoint()))
                         if action == bump:
                             from_id = 1 if v.edges[0].consistent_ports() else 0
                             # edge that will become consistent:
