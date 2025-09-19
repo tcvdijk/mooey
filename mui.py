@@ -2,6 +2,13 @@ import sys
 from math import inf, pow
 import datetime
 
+def timestring():
+    return datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+logfile = open(f"mooey-log-{timestring()}.txt", "w")
+print("o hai", file=logfile)
+def logline( msg ):
+    print( f"{datetime.datetime.now().strftime('%Y-%m-%d\t%H:%M:%S')}\t{msg}", file=logfile, flush=True )
+
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QSizePolicy, QFrame, QLabel, QCheckBox, QMenu, QMessageBox, QFileDialog, QDialog
 from PySide6.QtGui import QPainter, QPixmap, QColor, Qt, QTransform, QVector2D, QAction, QKeySequence
 from PySide6.QtCore import QPointF, QEvent
@@ -160,7 +167,7 @@ class Canvas(QWidget):
                         assert ui.hover_node is not None
                         assert ui.hover_edge is not None
                         ui.hover_node.straighten_deg2(ui.hover_edge)
-                        network_change = f'Straighten from "{ui.hover_node.label}" toward "{ui.hover_edge.other(ui.hover_node.name).label}"'
+                        network_change = f'Straighten from "{ui.hover_node.label}" toward "{ui.hover_edge.other(ui.hover_node).label}" (context menu)'
             elif ui.hover_node is not None and ui.hover_empty_port is None:
                 if ui.hover_node.is_right_angle():
                     menu = QMenu(self)
@@ -169,12 +176,12 @@ class Canvas(QWidget):
                     if action == smoothen:
                         ui.hover_node.smoothen()
                         network_change = f'Smoothen "{ui.hover_node.label}"'
-                if ui.hover_node.is_straight_through():
-                    v = ui.hover_node
-                    if (not v.edges[0].consistent_ports()) ^ (not v.edges[1].consistent_ports()):
-                        menu = QMenu(self)
-                        bump = menu.addAction("Bump")
-                        action = menu.exec(self.mapToGlobal(event.position().toPoint()))
+                if False and ui.hover_node.is_straight_through():
+                   v = ui.hover_node
+                   if (not v.edges[0].consistent_ports()) ^ (not v.edges[1].consistent_ports()):
+                       menu = QMenu(self)
+                       bump = menu.addAction("Bump")
+                       action = menu.exec(self.mapToGlobal(event.position().toPoint()))
                         if action == bump:
                             from_id = 1 if v.edges[0].consistent_ports() else 0
                             # edge that will become consistent:
@@ -232,7 +239,7 @@ class Canvas(QWidget):
         if doubleclick and event.buttons() == Qt.LeftButton:
             if ui.hover_edge is not None:
                 ui.hover_node.straighten_deg2( ui.hover_edge )
-                network_change = f'Straighten from "{ui.hover_node.label}" toward "{ui.hover_edge.other(ui.hover_node).label}"'
+                network_change = f'Straighten from "{ui.hover_node.label}" toward "{ui.hover_edge.other(ui.hover_node).label}" (double click)'
 
 
         ### Did we do anything? Then solve and render as appropriate, and to undo buffer
@@ -311,7 +318,7 @@ class Canvas(QWidget):
     
     def history_checkpoint(self, text):
         # Log the message
-        logline( text )
+        logline( "user\t"+text )
         # Delete the future
         self.history = self.history[0:self.history_index+1]
         # Add the present
@@ -337,14 +344,14 @@ class Canvas(QWidget):
 
     def undo(self):
         # Assumes we don't undo to before the start of time
-        logline("Undo")
+        logline("user\t"+"Undo")
         self.history_index -= 1
         self.fetch_history()
         self.update_history_actions()
         self.render()
     def redo(self):
         # Assumes the future exists
-        logline("Redo")
+        logline("user\t"+"Redo")
         self.history_index += 1
         self.fetch_history()
         self.update_history_actions()
@@ -432,11 +439,12 @@ def do_assign_ilp(window):
         bend_cost = dialog.get_value()
         assign_by_ilp(window.canvas.network,bend_cost)
         update_layout_if_auto(window)
-        window.canvas.history_checkpoint("Assign ports globally")
+        window.canvas.history_checkpoint(f"Assign ports globally (bend cost {bend_cost})")
         window.canvas.render()
     
 def do_layout(window):
     if layout_lp(window.canvas.network) is False:
+        logline( "user\t"+"Failed to realize layout.")
         m = QMessageBox()
         m.setText("Failed to realize layout.")
         m.setIcon(QMessageBox.Warning)
@@ -460,7 +468,7 @@ def do_reset_layout(window):
     window.canvas.history_checkpoint("Reset layout")
     window.canvas.render()
 
-def do_render(window):
+def do_render(window,tag=None):
     if window.canvas.filedata is None:
         m = QMessageBox()
         m.setText("Cannot render: opened file was not from Loom.")
@@ -469,7 +477,9 @@ def do_render(window):
         m.exec()
     else:
         export_loom( window.canvas.network, window.canvas.filedata )
-        render_loom( "render.json", "render.svg" )
+        if tag is None: filename = "render.svg"
+        else: filename = f"{timestring()}-render-{tag}.svg"
+        render_loom( "render.json", filename )
 
 def construct_sidebar(window,layout):
     group_separator(layout)
@@ -502,17 +512,16 @@ def construct_sidebar(window,layout):
     window.canvas.auto_render.setChecked(False)
     layout.addWidget(window.canvas.auto_render)
 
-    group_separator(layout)
-    sidebar_button( layout, "Log checkpoint 1", lambda:(QApplication.beep(),logline("User pressed checkpoint 1")))
-    sidebar_button( layout, "Log checkpoint 2", lambda:(QApplication.beep(),logline("User pressed checkpoint 2")))
-    sidebar_button( layout, "Log checkpoint 3", lambda:(QApplication.beep(),logline("User pressed checkpoint 3")))
-    sidebar_button( layout, "Log checkpoint 4", lambda:(QApplication.beep(),logline("User pressed checkpoint 4")))
-    sidebar_button( layout, "Log checkpoint 5", lambda:(QApplication.beep(),logline("User pressed checkpoint 5")))
-    sidebar_button( layout, "Log checkpoint 6", lambda:(QApplication.beep(),logline("User pressed checkpoint 6")))
-    sidebar_button( layout, "Log checkpoint 7", lambda:(QApplication.beep(),logline("User pressed checkpoint 7")))
-    sidebar_button( layout, "Log checkpoint 8", lambda:(QApplication.beep(),logline("User pressed checkpoint 8")))
-    sidebar_button( layout, "Log checkpoint 9", lambda:(QApplication.beep(),logline("User pressed checkpoint 9")))
-    sidebar_button( layout, "Log checkpoint 10", lambda:(QApplication.beep(),logline("User pressed checkpoint 10")))
+    if False:
+        # Checkpoint buttons for user studies
+        group_separator(layout)
+        layout.addWidget(QLabel("Log timing"))
+        sidebar_button( layout, "Start exploration", lambda:(QApplication.beep(),logline("check\tCheckpoint: Start exploration")))
+        sidebar_button( layout, "End exploration", lambda:(QApplication.beep(),do_render(window,"task-explore"),logline("check\tCheckpoint: End exploration")))
+        sidebar_button( layout, "Start task 1", lambda:(QApplication.beep(),logline("check\tCheckpoint: Start task 1")))
+        sidebar_button( layout, "End task 1", lambda:(QApplication.beep(),do_render(window,"task-1"),logline("check\tCheckpoint: End task 1")))
+        sidebar_button( layout, "Start task 2", lambda:(QApplication.beep(),logline("check\tCheckpoint: Start task 2")))
+        sidebar_button( layout, "End task 2", lambda:(QApplication.beep(),do_render(window,"task-2"),logline("check\tCheckpoint: End task 2")))
 
 
 def sidebar_button(layout, text, action):
@@ -525,13 +534,6 @@ def group_separator(layout):
     line.setFrameShape(QFrame.HLine)
     line.setFrameShadow(QFrame.Sunken)
     layout.addWidget(line)
-
-
-print("opening log file")
-logfile = open(f"mooey-log-{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt", "w")
-print("o hai", file=logfile)
-def logline( msg ):
-    print( datetime.datetime.now().strftime('%Y-%m-%d\t%H:%M:%S\t') + msg, file=logfile )
 
 
 if __name__ == "__main__":

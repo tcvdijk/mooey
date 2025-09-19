@@ -3,6 +3,8 @@ from time import perf_counter
 
 from Network import *
 
+from mui import logline
+
 from ortools.linear_solver import pywraplp as lp
 
 diag = 1/sqrt(2) # notational convenience
@@ -82,6 +84,8 @@ def layout_lp( net, stable_node:Node = None ):
     solver.Minimize( objective )
     status = solver.Solve()
     if status==lp.Solver.OPTIMAL:
+        runtime = perf_counter()-start
+        logline( "layout\tLayout LP runtime (s)\t" + str(runtime) )
         print( "Layout LP runtime",perf_counter()-start,"s")
         for v in net.nodes.values():
             v.set_position( v.xvar.solution_value(), v.yvar.solution_value() )
@@ -95,6 +99,7 @@ def layout_lp( net, stable_node:Node = None ):
         if stable_node is not None: return stable_node.pos - old_stable_pos
         else: return True
     else:
+        logline( "stats\tlayout failed with status "+str(status))
         print(status)
         print('OPTIMAL', status==lp.Solver.OPTIMAL)
         print('UNBOUNDED', status==lp.Solver.UNBOUNDED)

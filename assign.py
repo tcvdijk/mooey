@@ -1,6 +1,8 @@
 from math import pi
 from time import perf_counter
 
+from mui import logline
+
 from Network import *
 
 ### GEOGRAPHIC COST CALCULATIONS ###
@@ -78,7 +80,9 @@ def assign_by_ilp( net, bend_cost=1 ):
 
     solver.Minimize(objective)
     status = solver.Solve()
-    print( 'Port assignment ILP runtime', perf_counter()-start, 's' )
+    runtime = perf_counter()-start
+    logline( "pa-ilp\tPort assignment ILP runtime (s)\t" + str(runtime) )
+    print( 'Port assignment ILP runtime', runtime, 's' )
     print( 'Solver status', status )
     if status==0:
         net.evict_all_edges()
@@ -88,3 +92,4 @@ def assign_by_ilp( net, bend_cost=1 ):
                     v.assign(e,p)
     else:
         print( 'Port assignment ILP infeasible' )
+        logline( "stats\tPort assignment ILP infeasible" )

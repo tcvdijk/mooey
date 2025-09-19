@@ -1,0 +1,172 @@
+o hai
+2025-06-27	15:17:13	user	Initial drawing
+2025-06-27	15:18:41	user	Reassign at "Schottenring" - "Taborstraße" to port 4
+2025-06-27	15:19:04	user	Reassign at "Schottenring" - "Roßauer Lände" to port 6
+2025-06-27	15:19:06	user	Reassign at "Schottenring" - "Schottentor" to port 0
+2025-06-27	15:19:07	user	Reassign at "Schottenring" - "Schwedenplatz" to port 2
+2025-06-27	15:19:13	user	Reassign at "Roßauer Lände" - "Friedensbrücke" to port 6
+2025-06-27	15:19:15	user	Reassign at "Friedensbrücke" - "Spittelau" to port 6
+2025-06-27	15:19:18	user	Reassign at "Spittelau" - "Jägerstraße" to port 4
+2025-06-27	15:19:19	user	Reassign at "Spittelau" - "Heiligenstadt" to port 6
+2025-06-27	15:19:37	user	Reassign at "Schwedenplatz" - "Nestroyplatz" to port 5
+2025-06-27	15:19:38	user	Reassign at "Nestroyplatz" - "Praterstern" to port 5
+2025-06-27	15:19:58	user	Assign ports by matching
+2025-06-27	15:20:26	user	Reassign at "Schottentor" - "Schottenring" to port 5
+2025-06-27	15:20:43	layout	Layout LP runtime (s)	0.02216783305630088
+2025-06-27	15:20:43	user	Automated layout
+2025-06-27	15:21:20	pa-ilp	Port assignment ILP runtime (s)	0.06065299967303872
+2025-06-27	15:21:20	user	Assign ports globally (bend cost 2.5)
+2025-06-27	15:21:26	layout	Layout LP runtime (s)	0.014965500216931105
+2025-06-27	15:21:26	user	Automated layout
+2025-06-27	15:21:45	layout	Layout LP runtime (s)	0.009841625113040209
+2025-06-27	15:21:45	user	Reassign at "Spittelau" - "Heiligenstadt" to port 7
+2025-06-27	15:21:52	layout	Layout LP runtime (s)	0.009832124691456556
+2025-06-27	15:21:52	user	Reassign at "Schottenring" - "Roßauer Lände" to port 6
+2025-06-27	15:21:59	layout	Layout LP runtime (s)	0.011149208061397076
+2025-06-27	15:21:59	user	Reassign at "Friedensbrücke" - "Roßauer Lände" to port 2
+2025-06-27	15:22:00	layout	Layout LP runtime (s)	0.009119542315602303
+2025-06-27	15:22:00	user	Reassign at "Friedensbrücke" - "Spittelau" to port 6
+2025-06-27	15:22:17	layout	Layout LP runtime (s)	0.009609208907932043
+2025-06-27	15:22:17	user	Reassign at "Schottenring" - "Roßauer Lände" to port 7
+2025-06-27	15:22:19	layout	Layout LP runtime (s)	0.01218979200348258
+2025-06-27	15:22:19	user	Reassign at "Roßauer Lände" - "Friedensbrücke" to port 7
+2025-06-27	15:22:23	layout	Layout LP runtime (s)	0.013059208169579506
+2025-06-27	15:22:23	user	Reassign at "Friedensbrücke" - "Spittelau" to port 7
+2025-06-27	15:22:55	layout	Layout LP runtime (s)	0.009466999676078558
+2025-06-27	15:22:55	user	Reassign at "Praterstern" - "Vorgartenstraße" to port 6
+2025-06-27	15:23:12	layout	Layout LP runtime (s)	0.011233916971832514
+2025-06-27	15:23:12	user	Straighten from "Praterstern" toward "Vorgartenstraße" (context menu)
+2025-06-27	15:23:17	layout	Layout LP runtime (s)	0.01196966739371419
+2025-06-27	15:23:17	user	Reassign at "Landstraße" - "Rochusgasse" to port 4
+2025-06-27	15:23:18	layout	Layout LP runtime (s)	0.009951708372682333
+2025-06-27	15:23:18	user	Straighten from "Landstraße" toward "Rochusgasse" (context menu)
+2025-06-27	15:23:24	layout	Layout LP runtime (s)	0.013345791958272457
+2025-06-27	15:23:24	user	Straighten from "Burggasse-Stadthalle" toward "Thaliastraße" (context menu)
+2025-06-27	15:23:28	layout	Layout LP runtime (s)	0.012202249839901924
+2025-06-27	15:23:28	user	Reassign at "Volkstheater" - "Rathaus" to port 6
+2025-06-27	15:23:32	layout	Layout LP runtime (s)	0.012993374839425087
+2025-06-27	15:23:32	user	Reassign at "Museumsquartier" - "Volkstheater" to port 6
+2025-06-27	15:23:37	layout	Layout LP runtime (s)	0.014171500224620104
+2025-06-27	15:23:37	user	Reassign at "" - "Museumsquartier" to port 0
+2025-06-27	15:23:39	layout	Layout LP runtime (s)	0.010665041860193014
+2025-06-27	15:23:39	user	Reassign at "Karlsplatz" - "Stadtpark" to port 4
+2025-06-27	15:23:43	layout	Layout LP runtime (s)	0.009402959141880274
+2025-06-27	15:23:43	user	Reassign at "Landstraße" - "Stadtpark" to port 2
+2025-06-27	15:29:43	layout	Layout LP runtime (s)	0.012065125163644552
+2025-06-27	15:29:43	user	Reassign at "Schlachthausgasse" - "Erdberg" to port 6
+2025-06-27	15:29:45	layout	Layout LP runtime (s)	0.011852959170937538
+2025-06-27	15:29:45	user	Straighten from "Schlachthausgasse" toward "Erdberg" (context menu)
+2025-06-27	15:30:15	layout	Layout LP runtime (s)	0.011470374651253223
+2025-06-27	15:30:15	user	Reassign at "Schlachthausgasse" - "Erdberg" to port 4
+2025-06-27	15:30:16	layout	Layout LP runtime (s)	0.010695124976336956
+2025-06-27	15:30:16	user	Straighten from "Schlachthausgasse" toward "Erdberg" (context menu)
+2025-06-27	15:30:24	layout	Layout LP runtime (s)	0.011615917086601257
+2025-06-27	15:30:24	user	Reassign at "Schlachthausgasse" - "Erdberg" to port 5
+2025-06-27	15:30:26	layout	Layout LP runtime (s)	0.013046542182564735
+2025-06-27	15:30:26	user	Reassign at "Erdberg" - "Gasometer" to port 5
+2025-06-27	15:30:28	layout	Layout LP runtime (s)	0.01069491682574153
+2025-06-27	15:30:28	user	Reassign at "Gasometer" - "Zippererstraße" to port 5
+2025-06-27	15:30:30	layout	Layout LP runtime (s)	0.013422207906842232
+2025-06-27	15:30:30	user	Reassign at "Zippererstraße" - "Enkplatz" to port 5
+2025-06-27	15:30:32	layout	Layout LP runtime (s)	0.012775624636560678
+2025-06-27	15:30:32	user	Reassign at "Donaumarina" - "Donaustadtbrücke" to port 5
+2025-06-27	15:30:50	layout	Layout LP runtime (s)	0.011989791877567768
+2025-06-27	15:30:50	user	Reassign at "Zippererstraße" - "Enkplatz" to port 4
+2025-06-27	15:30:53	layout	Layout LP runtime (s)	0.010708583053201437
+2025-06-27	15:30:53	user	Reassign at "Gasometer" - "Zippererstraße" to port 4
+2025-06-27	15:36:39	layout	Layout LP runtime (s)	0.01130737503990531
+2025-06-27	15:36:39	user	Reassign at "Praterstern" - "Vorgartenstraße" to port 5
+2025-06-27	15:36:59	layout	Layout LP runtime (s)	0.006662625353783369
+2025-06-27	15:36:59	user	Reassign at "Praterstern" - "Nestroyplatz" to port 2
+2025-06-27	15:37:01	layout	Layout LP runtime (s)	0.011841833125799894
+2025-06-27	15:37:01	user	Straighten from "Nestroyplatz" toward "Schwedenplatz" (double click)
+2025-06-27	15:37:29	layout	Layout LP runtime (s)	0.00972633296623826
+2025-06-27	15:37:29	user	Reassign at "Schlachthausgasse" - "Erdberg" to port 4
+2025-06-27	15:37:31	layout	Layout LP runtime (s)	0.007564625237137079
+2025-06-27	15:37:31	user	Reassign at "Erdberg" - "Schlachthausgasse" to port 2
+2025-06-27	15:40:44	layout	Layout LP runtime (s)	0.009667875245213509
+2025-06-27	15:40:44	user	Reassign at "" - "Museumsquartier" to port 6
+2025-06-27	15:40:51	layout	Layout LP runtime (s)	0.010372207965701818
+2025-06-27	15:40:51	user	Reassign at "Rochusgasse" - "Kardinal-Nagl-Platz" to port 6
+2025-06-27	15:40:53	layout	Layout LP runtime (s)	0.013021458871662617
+2025-06-27	15:40:53	user	Straighten from "Rochusgasse" toward "Kardinal-Nagl-Platz" (context menu)
+2025-06-27	15:41:10	layout	Layout LP runtime (s)	0.010103166103363037
+2025-06-27	15:41:10	user	Reassign at "Schlachthausgasse" - "Erdberg" to port 4
+2025-06-27	15:41:12	layout	Layout LP runtime (s)	0.008305833674967289
+2025-06-27	15:41:12	user	Reassign at "Erdberg" - "Gasometer" to port 5
+2025-06-27	15:41:13	layout	Layout LP runtime (s)	0.008687708992511034
+2025-06-27	15:41:13	user	Reassign at "Schlachthausgasse" - "Erdberg" to port 6
+2025-06-27	15:44:59	layout	Layout LP runtime (s)	0.007399083115160465
+2025-06-27	15:44:59	user	Reassign at "Rochusgasse" - "Kardinal-Nagl-Platz" to port 5
+2025-06-27	15:45:00	layout	Layout LP runtime (s)	0.013421541079878807
+2025-06-27	15:45:00	user	Straighten from "Rochusgasse" toward "Kardinal-Nagl-Platz" (double click)
+2025-06-27	15:45:03	layout	Layout LP runtime (s)	0.013493458740413189
+2025-06-27	15:45:03	user	Reassign at "Stadion" - "Donaumarina" to port 5
+2025-06-27	15:45:03	layout	Layout LP runtime (s)	0.012293166015297174
+2025-06-27	15:45:03	user	Straighten from "Stadion" toward "Donaumarina" (double click)
+2025-06-27	15:45:08	layout	Layout LP runtime (s)	0.008310457691550255
+2025-06-27	15:45:08	user	Reassign at "Praterstern" - "Vorgartenstraße" to port 6
+2025-06-27	15:45:11	layout	Layout LP runtime (s)	0.010157665703445673
+2025-06-27	15:45:11	user	Reassign at "Spittelau" - "Jägerstraße" to port 6
+2025-06-27	15:45:12	layout	Layout LP runtime (s)	0.012530542444437742
+2025-06-27	15:45:12	user	Straighten from "Spittelau" toward "Jägerstraße" (double click)
+2025-06-27	15:45:15	layout	Layout LP runtime (s)	0.012093875091522932
+2025-06-27	15:45:15	user	Straighten from "Westbahnhof" toward "Schweglerstraße" (double click)
+2025-06-27	15:45:18	layout	Layout LP runtime (s)	0.009674415923655033
+2025-06-27	15:45:18	user	Reassign at "" - "Kettenbrückengasse" to port 0
+2025-06-27	15:45:18	layout	Layout LP runtime (s)	0.014197416137903929
+2025-06-27	15:45:18	user	Straighten from "" toward "Kettenbrückengasse" (double click)
+2025-06-27	15:45:21	layout	Layout LP runtime (s)	0.006799833849072456
+2025-06-27	15:45:21	user	Reassign at "Längenfeldgasse" - "Niederhofstraße" to port 2
+2025-06-27	15:45:22	layout	Layout LP runtime (s)	0.01198416668921709
+2025-06-27	15:45:22	user	Straighten from "Längenfeldgasse" toward "Niederhofstraße" (double click)
+2025-06-27	15:45:27	layout	Layout LP runtime (s)	0.011683708056807518
+2025-06-27	15:45:27	user	Straighten from "Karlsplatz" toward "Taubstummengasse" (double click)
+2025-06-27	15:45:38	layout	Layout LP runtime (s)	0.01272954186424613
+2025-06-27	15:45:38	user	Smoothen "Stadtpark"
+2025-06-27	16:09:06	layout	Layout LP runtime (s)	0.013957374729216099
+2025-06-27	16:09:06	user	Reassign at "Landstraße" - "Schwedenplatz" to port 6
+2025-06-27	16:09:08	layout	Layout LP runtime (s)	0.007429792080074549
+2025-06-27	16:09:08	user	Reassign at "Stephansplatz" - "Schwedenplatz" to port 6
+2025-06-27	16:09:12	layout	Layout LP runtime (s)	0.013787542004138231
+2025-06-27	16:09:12	user	Reassign at "Nestroyplatz" - "Praterstern" to port 5
+2025-06-27	16:09:15	layout	Layout LP runtime (s)	0.00830075005069375
+2025-06-27	16:09:15	user	Reassign at "Rathaus" - "Volkstheater" to port 1
+2025-06-27	16:09:19	layout	Layout LP runtime (s)	0.013815124984830618
+2025-06-27	16:09:19	user	Reassign at "Schottenring" - "Taborstraße" to port 5
+2025-06-27	16:09:22	layout	Layout LP runtime (s)	0.011179584078490734
+2025-06-27	16:09:22	user	Reassign at "Rochusgasse" - "Landstraße" to port 1
+2025-06-27	16:09:26	layout	Layout LP runtime (s)	0.014796208124607801
+2025-06-27	16:09:26	user	Reassign at "Krieau" - "Stadion" to port 5
+2025-06-27	16:09:50	layout	Layout LP runtime (s)	0.015495417173951864
+2025-06-27	16:09:50	user	Reassign at "Volkstheater" - "Neubaugasse" to port 0
+2025-06-27	16:09:53	layout	Layout LP runtime (s)	0.012890500016510487
+2025-06-27	16:09:53	user	Reassign at "Neubaugasse" - "Zieglergasse" to port 0
+2025-06-27	16:09:55	layout	Layout LP runtime (s)	0.012219625059515238
+2025-06-27	16:09:55	user	Reassign at "Zieglergasse" - "Westbahnhof" to port 0
+2025-06-27	16:10:03	layout	Layout LP runtime (s)	0.008164959028363228
+2025-06-27	16:10:03	user	Reassign at "Roßauer Lände" - "Schottenring" to port 4
+2025-06-27	16:10:06	layout	Layout LP runtime (s)	0.012091707903891802
+2025-06-27	16:10:06	user	Reassign at "Roßauer Lände" - "Friedensbrücke" to port 0
+2025-06-27	16:10:10	layout	Layout LP runtime (s)	0.01458270801231265
+2025-06-27	16:10:10	user	Reassign at "Friedensbrücke" - "Spittelau" to port 0
+2025-06-27	16:10:15	layout	Layout LP runtime (s)	0.008277417160570621
+2025-06-27	16:10:15	user	Reassign at "Westbahnhof" - "Burggasse-Stadthalle" to port 5
+2025-06-27	16:10:23	layout	Layout LP runtime (s)	0.014631208963692188
+2025-06-27	16:10:23	user	Reassign at "Thaliastraße" - "Burggasse-Stadthalle" to port 4
+2025-06-27	16:10:25	layout	Layout LP runtime (s)	0.008643665816634893
+2025-06-27	16:10:25	user	Reassign at "Thaliastraße" - "Josefstädter Straße" to port 5
+2025-06-27	16:10:33	layout	Layout LP runtime (s)	0.015057624783366919
+2025-06-27	16:10:33	user	Reassign at "Alser Straße" - "Josefstädter Straße" to port 4
+2025-06-27	16:10:35	layout	Layout LP runtime (s)	0.006840166635811329
+2025-06-27	16:10:35	user	Reassign at "Alser Straße" - "Michelbeuern-AKH" to port 5
+2025-06-27	16:10:38	layout	Layout LP runtime (s)	0.015634624753147364
+2025-06-27	16:10:38	user	Reassign at "Michelbeuern-AKH" - "Währinger Str.-Volksoper" to port 0
+2025-06-27	16:10:39	layout	Layout LP runtime (s)	0.006211208179593086
+2025-06-27	16:10:39	user	Reassign at "Währinger Str.-Volksoper" - "Nußdorfer Straße" to port 5
+2025-06-27	16:10:44	layout	Layout LP runtime (s)	0.00980420783162117
+2025-06-27	16:10:44	user	Reassign at "Nußdorfer Straße" - "Spittelau" to port 0
+2025-06-27	16:10:49	layout	Layout LP runtime (s)	0.014417374972254038
+2025-06-27	16:10:49	user	Reassign at "Spittelau" - "Nußdorfer Straße" to port 3
+2025-06-27	16:10:51	layout	Layout LP runtime (s)	0.014926583971828222
+2025-06-27	16:10:51	user	Reassign at "Spittelau" - "Friedensbrücke" to port 4
